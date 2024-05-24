@@ -118,12 +118,10 @@ func checkArgs(event *corev2.Event) (int, error) {
 }
 
 func executeCheck(event *corev2.Event) (int, error) {
-	var dataSourceName string = ""
+	var dataSourceName string
 
 	var dbUser, dbPass string
 	if plugin.IniFile != "" {
-		// Assuming a simple ini file parsing library is used here.
-		// You might need to implement or use an existing library for parsing ini files.
 		iniFile, err := ini.Load(plugin.IniFile)
 		if err != nil {
 			return sensu.CheckStateCritical, fmt.Errorf("error parsing ini file: %v", err)
