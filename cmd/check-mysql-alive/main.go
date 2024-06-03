@@ -62,10 +62,11 @@ var (
 			Default:  3306,
 		},
 		&sensu.PluginConfigOption[string]{
-			Path:     "Socket",
-			Argument: "socket",
-			Usage:    "Socket to use",
-			Value:    &plugin.Socket,
+			Path:      "Socket",
+			Argument:  "socket",
+			Shorthand: "s",
+			Usage:     "Socket to use",
+			Value:     &plugin.Socket,
 		},
 		&sensu.PluginConfigOption[string]{
 			Path:     "hostname",
