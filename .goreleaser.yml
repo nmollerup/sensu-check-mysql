@@ -2,7 +2,7 @@ project_name: "sensu-check-mysql"
 builds:
   # List of builds
   - main: ./cmd/check-mysql-alive/main.go
-    id: "check-puppet-errors"
+    id: "check-mysql-alive"
     env:
     - CGO_ENABLED=0
     ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
@@ -29,6 +29,36 @@ builds:
       - linux_arm64
       - windows_386
       - windows_amd64
+
+  - main: ./cmd/check-mysql-connections/main.go
+    id: "check-mysql-connections"
+    env:
+    - CGO_ENABLED=0
+    ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
+    # Set the binary output location to bin/ so archive will comply with Sensu Go Asset structure
+    binary: bin/check-mysql-connections
+    goos:
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    goarm:
+      - 5
+      - 6
+      - 7
+    targets:
+      - linux_386
+      - linux_amd64
+      - linux_arm_5
+      - linux_arm_6
+      - linux_arm_7
+      - linux_arm64
+      - windows_386
+      - windows_amd64
+
 
 checksum:
   name_template: "{{ .ProjectName }}_{{ .Version }}_sha512-checksums.txt"
