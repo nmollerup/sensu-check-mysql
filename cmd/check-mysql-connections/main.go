@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/dariubs/percent"
 	_ "github.com/go-sql-driver/mysql"
 	corev2 "github.com/sensu/sensu-go/api/core/v2"
 	"github.com/sensu/sensu-plugin-sdk/sensu"
@@ -184,19 +185,19 @@ func executeCheck(event *corev2.Event) (int, error) {
 		return sensu.CheckStateCritical, fmt.Errorf("error fetching connections: %v", err)
 	}
 
-	if usedConnections >= plugin.Critical {
-		return sensu.CheckStateCritical, fmt.Errorf("max connections reached in MySQL: %d out of %d", usedConnections, maxConnections)
-	}
-	if usedConnections >= plugin.Warning {
-		return sensu.CheckStateWarning, fmt.Errorf("max connections reached in MySQL: %d out of %d", usedConnections, maxConnections)
-	}
-
 	if plugin.Percentage {
-		percentage := usedConnections / maxConnections * 100
-		if percentage >= plugin.Critical {
+		percentage := percent.PercentOf(usedConnections, maxConnections)
+		if percentage >= float64(plugin.Critical) {
 			return sensu.CheckStateCritical, fmt.Errorf("max connections reached in MySQL: %d out of %d", usedConnections, maxConnections)
 		}
-		if percentage >= plugin.Warning {
+		if percentage >= float64(plugin.Warning) {
+			return sensu.CheckStateWarning, fmt.Errorf("max connections reached in MySQL: %d out of %d", usedConnections, maxConnections)
+		}
+	} else if !plugin.Percentage {
+		if usedConnections >= plugin.Critical {
+			return sensu.CheckStateCritical, fmt.Errorf("max connections reached in MySQL: %d out of %d", usedConnections, maxConnections)
+		}
+		if usedConnections >= plugin.Warning {
 			return sensu.CheckStateWarning, fmt.Errorf("max connections reached in MySQL: %d out of %d", usedConnections, maxConnections)
 		}
 	}
