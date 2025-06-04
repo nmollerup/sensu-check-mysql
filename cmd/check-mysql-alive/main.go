@@ -144,7 +144,10 @@ func executeCheck(event *corev2.Event) (int, error) {
 	if err != nil {
 		return sensu.CheckStateCritical, fmt.Errorf("error connecting to MySQL: %v", err)
 	}
-	defer db.Close()
+
+	defer func() {
+		_ = db.Close()
+	}()
 
 	err = db.Ping()
 	if err != nil {

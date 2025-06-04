@@ -171,7 +171,10 @@ func executeCheck(event *corev2.Event) (int, error) {
 	if err != nil {
 		return sensu.CheckStateCritical, fmt.Errorf("error connecting to MySQL: %v", err)
 	}
-	defer db.Close()
+
+	defer func() {
+		_ = db.Close()
+	}()
 
 	var maxConnections int
 	err = db.QueryRow("SELECT @@GLOBAL.max_connections").Scan(&maxConnections)
