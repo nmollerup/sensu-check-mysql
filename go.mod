@@ -9,7 +9,7 @@ require (
 	github.com/go-sql-driver/mysql v1.9.3
 	github.com/sensu/sensu-go/api/core/v2 v2.14.0
 	github.com/sensu/sensu-plugin-sdk v0.16.0
-	gopkg.in/ini.v1 v1.67.0
+	gopkg.in/ini.v1 v1.67.1
 )
 
 require (
@@ -39,7 +39,6 @@ require (
 	github.com/spf13/jwalterweatherman v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.0 // indirect
-	github.com/stretchr/testify v1.8.0 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.5 // indirect
 	golang.org/x/net v0.38.0 // indirect
