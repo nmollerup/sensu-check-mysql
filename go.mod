@@ -6,14 +6,14 @@ toolchain go1.24.1
 
 require (
 	github.com/dariubs/percent v1.0.0
-	github.com/go-sql-driver/mysql v1.9.3
+	github.com/go-sql-driver/mysql v1.10.0
 	github.com/sensu/sensu-go/api/core/v2 v2.14.0
 	github.com/sensu/sensu-plugin-sdk v0.16.0
 	gopkg.in/ini.v1 v1.67.2
 )
 
 require (
-	filippo.io/edwards25519 v1.1.1 // indirect
+	filippo.io/edwards25519 v1.2.0 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/echlebek/timeproxy v1.0.0 // indirect
