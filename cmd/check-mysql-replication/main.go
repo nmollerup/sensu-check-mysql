@@ -247,7 +247,7 @@ func checkMariaDBReplication(db *sql.DB) (int, error) {
 			return sensu.CheckStateCritical, fmt.Errorf("error executing %s: %v", query, err)
 		}
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	if !rows.Next() {
 		return sensu.CheckStateCritical, fmt.Errorf("replication is not configured on this server")

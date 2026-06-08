@@ -203,7 +203,7 @@ func queryCount(db *sql.DB, query string, countValue bool) (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	if countValue {
 		if !rows.Next() {

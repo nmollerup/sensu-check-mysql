@@ -266,7 +266,7 @@ func queryLocks(db *sql.DB, usePerformanceSchema bool) ([]lockInfo, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var locks []lockInfo
 	for rows.Next() {
