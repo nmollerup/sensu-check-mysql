@@ -38,6 +38,38 @@ builds:
       - windows_386
       - windows_amd64
 
+  - main: ./cmd/check-mysql-replication/main.go
+    id: "check-mysql-replication"
+    env:
+    - CGO_ENABLED=0
+    ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
+    binary: bin/check-mysql-replication
+    targets:
+      - linux_386
+      - linux_amd64
+      - linux_arm_5
+      - linux_arm_6
+      - linux_arm_7
+      - linux_arm64
+      - windows_386
+      - windows_amd64
+
+  - main: ./cmd/check-mysql-threads/main.go
+    id: "check-mysql-threads"
+    env:
+    - CGO_ENABLED=0
+    ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
+    binary: bin/check-mysql-threads
+    targets:
+      - linux_386
+      - linux_amd64
+      - linux_arm_5
+      - linux_arm_6
+      - linux_arm_7
+      - linux_arm64
+      - windows_386
+      - windows_amd64
+
 
 checksum:
   name_template: "{{ .ProjectName }}_{{ .Version }}_sha512-checksums.txt"
