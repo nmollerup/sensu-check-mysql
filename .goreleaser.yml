@@ -70,6 +70,22 @@ builds:
       - windows_386
       - windows_amd64
 
+  - main: ./cmd/check-mysql-innodb-lock/main.go
+    id: "check-mysql-innodb-lock"
+    env:
+    - CGO_ENABLED=0
+    ldflags: '-s -w -X github.com/sensu-community/sensu-plugin-sdk/version.version={{.Version}} -X github.com/sensu-community/sensu-plugin-sdk/version.commit={{.Commit}} -X github.com/sensu-community/sensu-plugin-sdk/version.date={{.Date}}'
+    binary: bin/check-mysql-innodb-lock
+    targets:
+      - linux_386
+      - linux_amd64
+      - linux_arm_5
+      - linux_arm_6
+      - linux_arm_7
+      - linux_arm64
+      - windows_386
+      - windows_amd64
+
   - main: ./cmd/check-mysql-disk/main.go
     id: "check-mysql-disk"
     env:
